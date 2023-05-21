@@ -28,4 +28,21 @@ public class AddressBookTest {
         }
         Assert.assertEquals(6,totalRowsCount);
     }
+
+    @Test
+    public void givenSearchByCityQueryShouldReturnContactsCount(){
+        Connection conn = null;
+        Statement stmt = null;
+        int countContactByCity = 0;
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            countContactByCity = AddressBookUsingJdbc.getContactsByCity(stmt);
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+        Assert.assertEquals(1,countContactByCity);
+
+    }
 }
